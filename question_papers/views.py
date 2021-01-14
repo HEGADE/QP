@@ -1,9 +1,10 @@
 from django.shortcuts import render, HttpResponse
 from .models import Question_papers,Issues,Provider
-from django.http import request
+from django.http import request,HttpRequest
 from django.contrib import messages
 from django.core.mail import send_mail
 from .forms import ProviderForm,issueForm
+from django.core import serializers
 
 # Create your views here.
 def uni():
@@ -26,6 +27,10 @@ def yea():
     yea=Question_papers.objects.order_by('year').distinct('year')
     return yea
 
+def filter_first_option(request):
+    college=Question_papers.objects.order_by('college').distinct('college')
+    qs_json=serializers.serialize('json',college)
+    return HttpResponse(qs_json,content_type='application/json')
 
 def colleges(request):
     allqp=Question_papers.objects.order_by('college').distinct('college')
@@ -33,22 +38,44 @@ def colleges(request):
     return render(request,'question_papers/colleges.html',context)
 
 def college(request,college):
+    if college.startswith("json"):
+        college=college.split("-")[1]
+        college=Question_papers.objects.filter(college=college).order_by('university').distinct('university')
+        qs_json=serializers.serialize('json',college)
+        return HttpResponse(qs_json,content_type='application/json')
+
+
     college=Question_papers.objects.filter(college=college).order_by('university').distinct('university')
     college={'college' : college,'coll':coll,'uni':uni,'co':co,'subj':subj,'yea':yea}
     return render(request,'question_papers/universities.html',college)
 
 def university(request,college,university):
+    if college.startswith("json"):
+        college=college.split("-")[1]
+        university=Question_papers.objects.filter(university=university,college=college).order_by('course').distinct('course')
+        qs_json=serializers.serialize('json',university)
+        return HttpResponse(qs_json,content_type='application/json')
     university=Question_papers.objects.filter(university=university,college=college).order_by('course').distinct('course')
     university={'university' : university,'coll':coll,'uni':uni,'co':co,'subj':subj,'yea':yea}
     return render(request,'question_papers/courses.html',university)
 
 def course(request,college,university,course):
+    if college.startswith("json"):
+        college=college.split("-")[1]
+        course=Question_papers.objects.filter(course=course, university=university).order_by('year').distinct('year')
+        qs_json=serializers.serialize('json',course)
+        return HttpResponse(qs_json,content_type='application/json')
     course=Question_papers.objects.filter(course=course, university=university).order_by('year').distinct('year')
     course={'course' : course,'coll':coll,'uni':uni,'co':co,'subj':subj,'yea':yea}
     return render(request,'question_papers/classes.html',course)
 
  
 def year(request,college,university,course,year):
+    if college.startswith("json"):
+        college=college.split("-")[1]
+        year=Question_papers.objects.filter(course=course,university=university).order_by('subject').distinct('subject')
+        qs_json=serializers.serialize('json',year)
+        return HttpResponse(qs_json,content_type='application/json')
     year=Question_papers.objects.filter(course=course,university=university).order_by('subject').distinct('subject')
     year={'year':year,'coll':coll,'uni':uni,'co':co,'subj':subj,'yea':yea}
     return render(request,'question_papers/subjects.html',year)
@@ -82,9 +109,11 @@ def filter(request):
     course=request.POST.get('course')
     year=request.POST.get('year')
     subject=request.POST.get('subject')
-    filter=Question_papers.objects.filter(college=college,year=year,course=course, subject=subject,university=university)
-    filter={'filter':filter}
-    return render(request,'question_papers/filter.html',filter)
+    print(f"college {college} university {university} course {course} year {year} subject {subject} ")
+    filter_obj=Question_papers.objects.filter(college=college).filter(year=year).filter(course=course).filter(subject=subject).filter(university=university)
+    print(filter_obj)
+    filter_obj={'context':filter_obj}
+    return render(request,'question_papers/filter.html',filter_obj)
 
 
 def issues(request):

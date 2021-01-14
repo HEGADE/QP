@@ -1,3 +1,4 @@
+{% include 'question_papers/navigation.html'  %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -45,11 +46,12 @@
                         <h1 id="paper">{{prepaper.examination}} : </h1>
                     </a>
                     <div class="icons">
-                        <td><a href="{{prepaper.paper.url}}" target="_blank">Open</a></td> -->
-                        <a href="{{prepaper.paper.url}}" download class="fa fa-download link"" aria-hidden=" true">
-                            <p></p>
+                        <td><a href="{{prepaper.paper.url}}" target="_blank">Open</a></td>
+                        <a href="{{prepaper.paper.url}}" download>
+                            <img src="{%static 'question_papers/images/download.png'%}" alt="download">
                         </a>
-                        <i class="fa fa-share link" aria-hidden="true" id="share">
+                        <i id="share">
+                            <img src="{%static 'question_papers/images/share.png'%}" alt="share">
                             <p></p>
                         </i>
                     </div>
