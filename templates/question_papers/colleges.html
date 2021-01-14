@@ -1,0 +1,30 @@
+{% include 'question_papers/navigation.html'  %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>question_papers</title>
+</head>
+<body>
+{% block colleges %}
+    <div class="colleges">
+        <p>Welcome to QP World</p>
+
+<h1>{{Select}} </h1>
+{% for qp in allqp %}
+<div class="college">
+    <a href="{{qp.college}}">
+        <img src="{%static 'question_papers/images/college.png' %}" alt="#">
+        <h4>{{qp.college| title}}</h4>
+    </a>
+</div>
+{% endfor %}
+</div>
+    
+{% endblock colleges %}
+{% include 'question_papers/footers.html'  %}
+
+</body>
+</html>

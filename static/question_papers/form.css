@@ -1,0 +1,63 @@
+/* Form CSS */
+.container {
+    display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+/* background-color: rgb(76, 76, 156); */
+color: black;
+max-width: 90%;
+border-radius: 8px;
+flex-wrap: wrap;
+margin:  1.3rem auto;
+
+
+}
+.form {
+    display: block;
+    width: 80%;
+    justify-content: center;
+    margin: auto;   
+}
+.form input,
+textarea {
+    margin: 5px;
+    padding: 5px;
+    border-radius: 8px;
+    width: 100%;
+    align-items: center;
+    font-weight: bold;
+    color: black;
+    margin-left: 0;
+    padding-left: 0;
+}
+label {
+    display: block;
+    font-size: 1.2rem;
+    align-items: center;
+    font-family: 'Average Sans', sans-serif;
+}
+.container button {
+    padding: 6px 20px;
+    border: 2px solid white;
+    background-color: rgb(94, 94, 216);
+    color: white;
+    font-size: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    display: block;
+    margin: 4px auto;
+}
+h3 {
+    font-family: 'Kanit', sans-serif;
+    text-align: center;
+    margin: 1.5rem 2rem;
+    max-width: 100%;
+}
+/* End of Form CSS */
+
+
+
+
+
+
