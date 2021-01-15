@@ -10,11 +10,8 @@
     <link rel="stylesheet" href="{%static 'question_papers/qp.css'%}">
     <link rel="stylesheet" href="{%static 'question_papers/all.css'%}">
     <link rel="shortcut icon" href="{%static 'question_papers/images/favicon.png'%}" type="image/x-icon">
-    <!-- <script data-ad-client="ca-pub-9645636288208408" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+    <script data-ad-client="ca-pub-9645636288208408" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
-
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link href="{% static 'main/css/bootstrap.min.css' %}" rel="stylesheet"> -->
 
 </head>
 
@@ -34,10 +31,23 @@
     </div>
     {% endfor %} 
     {% endif %}
+
+
     <!-- Navigation -->
     <div id="navbar">
-        <h1>QP Web</h1>
+        <div id="brand" class="flex">
+            <img id="menu" onclick="display_menu()" src="{%static 'question_papers/images/menu.png'%}" alt="menu">
+            <a href="/"><h1>QP Web</h1></a> 
+
+        </div>
         <div id="navitems">
+            <div id="user_menu_head">
+                <h6> Menu</h6>
+                <div>
+                    <img onclick="this.parentElement.parentElement.parentElement.style.display='none';" id="close_filterItems" src="{%static 'question_papers/images/close.svg'%}"
+                    alt="close">
+                </div>
+            </div>
             <a href="/">Home</a>
             <a href="{% url 'provider'%}">Provide</a>
             <a href="{% url 'contact'%}">Contact</a>
@@ -58,8 +68,12 @@
                     alt="Filter">
             </div>
         </div>
+        {% if request.user.is_authenticated %}
         <img id="user" src="{%static 'question_papers/images/user-circle.png'%}" alt="You">
-        <div id="menu">
+        {% else %}
+<a href="{% url 'login'%}">Login</a>
+        {% endif %}
+        <div id="user_menu">
             <div id="close_menu">
                 <img src="{%static 'question_papers/images/close.svg'%}" alt="close">
 
@@ -73,26 +87,11 @@
                 <button>View Profile</button>
                 <hr>
                 <p>Reffer friend</p>
-                {% else %}
-
-                <p>Hii Welcome </p>
-                <p>Good morning <br>have a great day</p>
-                <hr>
-                <button>Login</button>
-                <hr>
-                <p>Invite friend</p>
                 {% endif %}
 
-                <div class="mob_nav" style="display: none;">
-                    <hr>
-                    <a href="/">Home</a>
-                    <a href="/">Provide</a>
-                    <a href="/">Contact</a>
-                    <a href="/">About</a>
-                </div>
                 {% if request.user.is_authenticated %}
                 <hr>
-                <button>Logout</button>
+                <a href="{% url 'logout'%}">Logout</a>
                 {% endif %}
 
                 {% include "question_papers/share.html" %}
@@ -123,9 +122,7 @@
                 <select name="university" id="university" onchange="sel_Sec_Func()">
 
                     <option>--select--</option>
-                    <!-- {% for 2 in uni %}
-                    <option value="{{1.college}} " name="college ">{{2.university}}</option>
-                    {% endfor %} -->
+                    
 
                 </select>
             </div>
@@ -133,9 +130,7 @@
                 <label for="course ">Course : </label>
                 <select name="course" id="course" onchange="sel_Third_Func()">
                     <option>--select--</option>
-                    <!-- {% for 3 in co %}
-                    <option value="{{3.course}} " name="course ">{{3.course}}</option>
-                    {% endfor %} -->
+                   
                 </select>
             </div>
 
@@ -144,9 +139,7 @@
                 <label for="year ">Year : </label>
                 <select name="year" id="year" onchange="sel_Four_Func()">
                     <option>--select--</option>
-                    <!-- {% for 4 in yea %}
-                    <option value="{{4.year}} " name="year ">{{4.year}}</option>
-                    {% endfor %} -->
+                  
                 </select>
             </div>
             <div class="filter_item">
@@ -154,9 +147,7 @@
                 <label for="subject ">Subject : </label>
                 <select name="subject" id="subject">
                     <option>--select--</option>
-                    <!-- {% for 5 in subj %}
-                    <option value="{{5.subject}} " name="subject ">{{5.subject}}</option>
-                    {% endfor %} -->
+                    
                 </select>
             </div>
             <button type="submit ">Get</button>

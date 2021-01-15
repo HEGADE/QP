@@ -15,6 +15,7 @@ a {
 }
 
 /* Message starting */
+
 .first_row{
   display: flex;
   justify-content: space-between;
@@ -67,6 +68,13 @@ a {
 /* Message ending */
 
 /* Navigation */
+#menu{
+  display: none;
+}
+#user_menu_head{
+  display: none; 
+}
+
  #navbar {
     display: flex;
     align-items: center;
@@ -146,6 +154,11 @@ a {
 
 @media only screen and (max-width: 1024px) {
 
+#menu{
+  display: flex;
+  margin-right: 0.5rem;
+}
+
   #navbar {
     display: flex;
     align-items: center;
@@ -157,12 +170,39 @@ a {
     box-sizing: border-box;
   }
   #navbar h1 {
+    
+    font-size: 24px;
     color: blue;
     margin: 0;
     padding: 0;
   }
   #navitems {
+    box-sizing: border-box;
     display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    position: absolute;;
+   top: 0;
+    z-index: 4;
+    width: 100vw;
+    
+    background: rgb(108, 108, 145);
+  }
+  #navitems a{
+    color: black;
+  }
+
+  #user_menu_head{
+    display: flex;
+    background: rgb(53, 53, 168);
+    justify-content: space-between;
+    box-sizing: border-box;
+    align-items: center;
+    width: 100vw;
+    height: 10vh;
+    padding:0 15%;
+    text-transform: uppercase;
   }
   #rightnav {
     position: absolute;
@@ -226,7 +266,7 @@ a {
   }
 }
 
-#menu{
+#user_menu{
   display: none;
   position: absolute;
   z-index: 1;

@@ -336,7 +336,7 @@ close_filterItems = document.getElementById("close_filterItems");
 
 // select_first=document.getElementById("college")
 
-let menu = document.getElementById("menu");
+let user_menu = document.getElementById("user_menu");
 let user = document.getElementById("user");
 function open_filter() {
   console.log("clicked filter button");
@@ -349,10 +349,23 @@ function close_filter() {
 }
 
 document.getElementById("user").addEventListener("click", () => {
-  menu.style.display = "flex";
+  user_menu.style.display = "flex";
   user.classList.add("user_absolute");
 });
 document.getElementById("close_menu").addEventListener("click", () => {
   user.classList.remove("user_absolute");
-  menu.style.display = "none";
+  user_menu.style.display = "none";
 });
+
+
+navitems=document.getElementById("navitems");
+function display_menu(){
+  
+  navitems.style.display="flex";
+}
+
+
+setTimeout(() => {
+  msg_box=document.getElementById("msg_box");
+  msg_box.style.display='none'
+}, 10000);

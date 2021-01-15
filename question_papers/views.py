@@ -7,25 +7,6 @@ from .forms import ProviderForm,issueForm
 from django.core import serializers
 
 # Create your views here.
-def uni():
-    uni=Question_papers.objects.order_by('university').distinct('university')
-    return uni
-
-def coll():
-    coll=Question_papers.objects.order_by('college').distinct('college')
-    return coll
-
-def subj():
-    subj=Question_papers.objects.order_by('subject').distinct('subject')
-    return subj
-
-def co():
-    co=Question_papers.objects.order_by('course').distinct('course')
-    return co
-
-def yea():
-    yea=Question_papers.objects.order_by('year').distinct('year')
-    return yea
 
 def filter_first_option(request):
     college=Question_papers.objects.order_by('college').distinct('college')
@@ -34,7 +15,7 @@ def filter_first_option(request):
 
 def colleges(request):
     allqp=Question_papers.objects.order_by('college').distinct('college')
-    context={'allqp' : allqp,'Select':'Select Your Current Education : ','coll':coll,'uni':uni,'co':co,'subj':subj,'yea':yea}
+    context={'allqp' : allqp,'Select':'Select Your Current Education : '}
     return render(request,'question_papers/colleges.html',context)
 
 def college(request,college):
@@ -46,7 +27,7 @@ def college(request,college):
 
 
     college=Question_papers.objects.filter(college=college).order_by('university').distinct('university')
-    college={'college' : college,'coll':coll,'uni':uni,'co':co,'subj':subj,'yea':yea}
+    college={'college' : college}
     return render(request,'question_papers/universities.html',college)
 
 def university(request,college,university):
@@ -56,7 +37,7 @@ def university(request,college,university):
         qs_json=serializers.serialize('json',university)
         return HttpResponse(qs_json,content_type='application/json')
     university=Question_papers.objects.filter(university=university,college=college).order_by('course').distinct('course')
-    university={'university' : university,'coll':coll,'uni':uni,'co':co,'subj':subj,'yea':yea}
+    university={'university' : university}
     return render(request,'question_papers/courses.html',university)
 
 def course(request,college,university,course):
@@ -66,7 +47,7 @@ def course(request,college,university,course):
         qs_json=serializers.serialize('json',course)
         return HttpResponse(qs_json,content_type='application/json')
     course=Question_papers.objects.filter(course=course, university=university).order_by('year').distinct('year')
-    course={'course' : course,'coll':coll,'uni':uni,'co':co,'subj':subj,'yea':yea}
+    course={'course' : course}
     return render(request,'question_papers/classes.html',course)
 
  
@@ -77,7 +58,7 @@ def year(request,college,university,course,year):
         qs_json=serializers.serialize('json',year)
         return HttpResponse(qs_json,content_type='application/json')
     year=Question_papers.objects.filter(course=course,university=university).order_by('subject').distinct('subject')
-    year={'year':year,'coll':coll,'uni':uni,'co':co,'subj':subj,'yea':yea}
+    year={'year':year}
     return render(request,'question_papers/subjects.html',year)
 
 def question_papers(request,college,university,course,year,subject):
@@ -109,9 +90,7 @@ def filter(request):
     course=request.POST.get('course')
     year=request.POST.get('year')
     subject=request.POST.get('subject')
-    print(f"college {college} university {university} course {course} year {year} subject {subject} ")
     filter_obj=Question_papers.objects.filter(college=college).filter(year=year).filter(course=course).filter(subject=subject).filter(university=university)
-    print(filter_obj)
     filter_obj={'context':filter_obj}
     return render(request,'question_papers/filter.html',filter_obj)
 
