@@ -16,6 +16,7 @@ def filter_first_option(request):
 def colleges(request):
     allqp=Question_papers.objects.order_by('college').distinct('college')
     context={'allqp' : allqp,'Select':'Select Your Current Education : '}
+    print(allqp)
     return render(request,'question_papers/colleges.html',context)
 
 def college(request,college):

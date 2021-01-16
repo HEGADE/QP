@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Question_papers(models.Model):
-    provider=models.CharField(max_length=20)
+    provider=models.ForeignKey(User, on_delete=models.SET_DEFAULT,default="user",blank=True,null=True)
     PAPER_CHOICES=[('board','Board'),('university','University')]
     paper_type=models.CharField(max_length=12,choices=PAPER_CHOICES,blank=True,null=True)
     college = models.CharField(max_length=100)
@@ -28,7 +28,8 @@ class Question_papers(models.Model):
         
 class Provider(models.Model):
     name=models.ForeignKey(User, on_delete=models.SET_DEFAULT,default="user",blank=True,null=True)
-    level = models.CharField(max_length=100,blank=True,null=True)
+    PAPER_CHOICES=[('board','Board'),('university','University')]
+    paper_type=models.CharField(max_length=12,choices=PAPER_CHOICES,blank=True,null=True) 
     board=models.CharField(max_length=100)
     claass = models.CharField(max_length=100)
     sem = models.CharField(max_length=100)
