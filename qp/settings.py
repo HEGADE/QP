@@ -48,8 +48,6 @@ INSTALLED_APPS = [
 
 ]
 
-CKEDITOR_UPLOAD_PATH = "uploads/"
-CKEDITOR_BASEPATH = "/my_static/ckeditor/ckeditor/"
 
 MIDDLEWARE = [
     # 'whitenoise.middleware.WhiteNoiseMiddleware',
