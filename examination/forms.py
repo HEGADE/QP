@@ -9,15 +9,3 @@ class CreateUserForm(UserCreationForm):
         model= User
         fields=['username','name','email','password1','password2']
 
-
-
-# from django.contrib import admin
-# from ckeditor_uploader.widgets import CKEditorUploadingWidget
-
-# from .models import Practice
-
-# class PostAdminForm(forms.ModelForm):
-#     content = forms.CharField(widget=CKEditorUploadingWidget())
-#     class Meta:
-#         model = Practice
-#         fields = '__all__'

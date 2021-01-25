@@ -13,7 +13,7 @@ class UserOTP(models.Model):
 
 class Profile(models.Model):
 	user=models.OneToOneField(User,on_delete=models.CASCADE)
-	pic=models.ImageField(upload_to="profile_pics",default="../static/question_papers/images/user-circle.png")
+	pic=models.ImageField(upload_to="profile_pics")
 	bio=models.TextField(blank=True)
 	college=models.CharField(max_length=200, blank=True,null=True)
 	code=models.CharField(max_length=12,blank=True)
