@@ -16,9 +16,10 @@ class Question_papers(models.Model):
     examination=models.CharField(max_length=100)
     paper = models.FileField(upload_to='preqps')
     slug=models.CharField(max_length=400 , blank=True)
+    created=models.DateTimeField(auto_now_add=True, blank=True,null=True)
     
     def __str__(self):
-        return  self.college + ' , ' + self.course +' , '+self.year + ' - '+ self.subject 
+        return  self.paper_type + ' , '+ self.college + ' , ' + self.course +' , '+self.year + ' - '+ self.subject 
 
     def save(self, *args, **kwargs):
         self.slug=self.course+"_" + self.subject +"_" +self.year+"_" +self.examination+"_" + self.university
