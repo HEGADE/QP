@@ -10,17 +10,22 @@
 {% block body %}
 <head>
     <link rel="stylesheet" href="{%static 'question_papers/profile.css'%}"/>
+    <script src="{%static 'question_papers/account_details.js'%}"></script>
+
 </head>
 <div id="outerbox">
 <div class="profile">
     <header>
         <h1>Profile</h1>
-        <button id="edit_profile" onclick="editProfile()">Edit <img id="edit_icon" src="{%static 'question_papers/images/pensil.png'%}" alt=""> </button>
+        <button id="edit_profile" onclick="edit_profile()">Edit <img id="edit_icon" src="{%static 'question_papers/images/pensil.png'%}" alt=""> </button>
 
     </header>
     <img id="pic"  src="{{request.user.profile.pic.url}}" alt="photo">
     
 <input type="file" id="profile_photo_input" name="pic" accept="image/*">
+
+<p style="display: none;">{{request.user.id}}</p>
+
 <fieldset>
     <legend>Name</legend>
     <p class="editable" id="username">{{request.user.username}}</p>
@@ -37,6 +42,8 @@
 <p class="userlinks" id="papers">Papers provided by you</p>
 
 <p class="userlinks" id="refs"> People reffered by you</p>
+<p >Created: {{request.user.profile.updated}}</p>
+<p>Updated: {{request.user.profile.created}}</p>
 </div>
 
 
