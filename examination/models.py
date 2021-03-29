@@ -39,5 +39,4 @@ class Profile(models.Model):
 			self.code=code
 		super().save(*args,**kwargs)
 class Practice(models.Model):
-	student=models.ForeignKey(User, on_delete=models.CASCADE)
-	content = models.TextField()
+	pass
