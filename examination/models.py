@@ -38,5 +38,5 @@ class Profile(models.Model):
 			code=generate_ref_code()
 			self.code=code
 		super().save(*args,**kwargs)
-class Practice(models.Model):
-	pass
+# class Practice(models.Model):
+# 	pass

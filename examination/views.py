@@ -173,7 +173,7 @@ def profile(request):
 	context={}
 	return render(request, 'accounts/profile.html', context)
 
-def test_view(request):
-	context={}
-	return render(request,'practice/sheet.html',context)
+# def test_view(request):
+# 	context={}
+# 	return render(request,'practice/sheet.html',context)
 
