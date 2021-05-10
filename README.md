@@ -48,3 +48,5 @@ _move to the main directory_
 * Running the server
 ```python manage.py runserver```
 
+* Visit website here http://127.0.0.1:8000/
+
