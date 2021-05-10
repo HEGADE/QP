@@ -1,4 +1,4 @@
-# QPWeb# QP
+# QPWeb
 
 This is an website to help students get question papers from diffrent boards and universites. Question papers are accepted in pdf format from any authenticated user. Like every other websites this website also includes about and contact pages.
 
