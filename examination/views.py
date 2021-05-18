@@ -85,7 +85,7 @@ def signup(request,*args,**kwargs):
 
 	return render(request, 'accounts/register.html', {'form':form})
 
-def resend_otp(request):
+def resend_otp(request,*args,**kwargs):
 	if request.method == "GET":
 		get_usr = request.GET['usr']
 		if User.objects.filter(username = get_usr).exists() and not User.objects.get(username = get_usr).is_active:

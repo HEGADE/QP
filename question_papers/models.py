@@ -41,7 +41,7 @@ class Provider(models.Model):
     
     
     def __str__(self):
-        return  self.name + ' , ' + self.level +' , '+self.board + ' - '+ self.sub    
+        return  self.paper_type +' , '+self.board + ' - '+ self.sub    
 
 
 class Issues(models.Model):
